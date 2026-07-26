@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS & English Practice - Ms Lê Hằng English</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-pink: #FF80AB;
+      --pastel-pink-bg: #FFF0F5;
+      --accent-yellow: #FDCB6E;
+      --correct-green: #00D26A;
+      --wrong-red: #FF4757;
+      --purple-accent: #8854C0;
+      --card-bg: #FFFFFF;
+      --text-color: #2D3436;
+      --border-color: #F8BBD0;
+      --highlight-yellow: #FFF59D;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #FFB6C1;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 128, 171, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(253, 203, 110, 0.4) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ctext x='10' y='30' font-size='20'%3E🌸%3C/text%3E%3Ctext x='70' y='60' font-size='22'%3E✨%3C/text%3E%3Ctext x='30' y='90' font-size='20'%3E🎒%3C/text%3E%3Ctext x='80' y='110' font-size='18'%3E🚂%3C/text%3E%3C/svg%3E");
+      animation: gradientBG 15s ease infinite alternate;
+      color: var(--text-color);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* HEADER BAR */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 3px solid var(--primary-pink);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--purple-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFF;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 2px solid var(--primary-pink);
+      box-shadow: 0 3px 0 var(--primary-pink);
+    }
+
+    .timer-display {
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--wrong-red);
+      min-width: 55px;
+    }
+
+    .btn-timer {
+      background: var(--purple-accent);
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #5e35b1;
+      transition: all 0.2s ease;
+    }
+
+    .btn-timer:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #5e35b1;
+    }
+
+    /* NAV TABS & PROGRESS BAR */
+    .nav-tabs-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 6px 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #FFF;
+      border: 2px solid #E0E0E0;
+      padding: 8px 14px;
+      border-radius: 15px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #CCC;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-pink);
+      color: white;
+      border-color: #FF4081;
+      box-shadow: 0 3px 0 #C2185B;
+    }
+
+    .progress-box {
+      flex: 1;
+      max-width: 250px;
+      min-width: 150px;
+      background: #E0E0E0;
+      height: 18px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #FFF;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-yellow), var(--correct-green));
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 11px;
+      font-weight: 800;
+      color: #333;
+    }
+
+    /* MAIN CONTAINER SPLIT SCREEN */
+    .main-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 105px);
+      padding: 12px;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .split-panel {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      border: 3px solid var(--border-color);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* LEFT PANEL: READING PASSAGES */
+    .section-header-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--purple-accent);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px dashed var(--primary-pink);
+    }
+
+    .paragraph-card {
+      background: #FFF;
+      border: 2px solid #F8BBD0;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 10px rgba(255, 128, 171, 0.08);
+      position: relative;
+      line-height: 1.75;
+      font-size: 14.5px;
+      transition: border-color 0.3s;
+    }
+
+    .paragraph-card.highlight-target {
+      animation: pulseHighlight 2s ease infinite;
+      border-color: #FF4081;
+    }
+
+    @keyframes pulseHighlight {
+      0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.5); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 64, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
+    }
+
+    .btn-toggle-trans {
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1.5px solid #FFE0B2;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle-trans:hover {
+      background: #FFE0B2;
+    }
+
+    .translation-box {
+      display: none;
+      margin-top: 10px;
+      padding: 12px;
+      background: #FFFDE7;
+      border-left: 4px solid var(--accent-yellow);
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .pastel-highlight {
+      background-color: var(--highlight-yellow);
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    /* GLOSSARY TABLE */
+    .glossary-section {
+      margin-top: 25px;
+      background: #FFF;
+      border-radius: 16px;
+      border: 2px solid var(--primary-pink);
+      padding: 16px;
+    }
+
+    .glossary-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--purple-accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .glossary-table th, .glossary-table td {
+      border: 1px solid #F8BBD0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .glossary-table th {
+      background: #FCE4EC;
+      color: var(--purple-accent);
+      font-weight: 800;
+    }
+
+    .glossary-table tr:nth-child(even) {
+      background: #FFF8FA;
+    }
+
+    /* RIGHT PANEL: EXERCISES */
+    .question-card {
+      background: #FFF;
+      border: 2px solid #E0E0E0;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+
+    .question-card:hover {
+      border-color: var(--primary-pink);
+    }
+
+    .q-number {
+      display: inline-block;
+      background: var(--purple-accent);
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .q-text {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: #2D3436;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    /* MCQ OPTIONS */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-btn {
+      background: #FFF;
+      border: 2px solid #E0E0E0;
+      border-radius: 14px;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: #444;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #E0E0E0;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .option-btn:hover {
+      transform: scale(1.01);
+      border-color: var(--primary-pink);
+    }
+
+    .option-btn.correct {
+      background: var(--correct-green) !important;
+      color: white !important;
+      border-color: #00B0FF !important;
+      box-shadow: 0 3px 0 #008744 !important;
+    }
+
+    .option-btn.wrong {
+      background: var(--wrong-red) !important;
+      color: white !important;
+      border-color: #D63031 !important;
+      box-shadow: 0 3px 0 #D63031 !important;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* EXPLANATION CARD */
+    .explanation-card {
+      display: none;
+      margin-top: 14px;
+      background: #F0F4C3;
+      border: 2px solid #C0CA33;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .exp-title {
+      font-weight: 900;
+      color: #2E7D32;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .btn-locate {
+      background: #FFF;
+      border: 1.5px solid #2E7D32;
+      color: #2E7D32;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 0 #A5D6A7;
+    }
+
+    .btn-locate:hover {
+      background: #E8F5E9;
+    }
+
+    .exp-item {
+      margin-bottom: 6px;
+    }
+
+    .exp-item strong {
+      color: #1B5E20;
+    }
+
+    /* SUBMIT & SCORE OVERLAY */
+    .submit-bar {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn-submit-all {
+      background: linear-gradient(135deg, #FF4081, #8854C0);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 17px;
+      font-weight: 900;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #6A1B9A;
+      transition: all 0.2s;
+    }
+
+    .btn-submit-all:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #6A1B9A;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .score-modal {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 4px solid var(--primary-pink);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .score-badge {
+      font-size: 46px;
+      font-weight: 900;
+      color: var(--purple-accent);
+      margin: 15px 0;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 850px) {
+      .main-container {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      body {
+        overflow: auto;
+      }
+      .split-panel {
+        height: auto;
+        max-height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- TOP CONTROL HEADER -->
+  <header>
+    <div class="brand-title">
+      <span>👩‍🏫</span>
+      <span>Giáo viên tạo: Ms Lê Hằng English</span>
+    </div>
+
+    <div class="timer-container">
+      <span>⏱️</span>
+      <div class="timer-display" id="timer-display">20:00</div>
+      <button class="btn-timer" id="btn-timer-toggle" onclick="toggleTimer()">BẮT ĐẦU TÍNH GIỜ LÀM BÀI</button>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS & PROGRESS -->
+  <div class="nav-tabs-bar">
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab(0)">Ex 7 & 8 (Điền từ) 🏫🚂</button>
+      <button class="tab-btn" onclick="switchTab(1)">Ex 9 (London) 🏙️</button>
+      <button class="tab-btn" onclick="switchTab(2)">Ex 10 (Tết Hàn Quốc) 🧧</button>
+      <button class="tab-btn" onclick="switchTab(3)">Ex 11 (Hội thoại) 🗣️</button>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-fill" id="progress-fill"></div>
+      <div class="progress-text" id="progress-text">Tiến độ: 0%</div>
+    </div>
+  </div>
+
+  <!-- MAIN SPLIT SCREEN INTERFACE -->
+  <div class="main-container">
+    <!-- LEFT PANEL: READING PASSAGES & DIALOGUES -->
+    <div class="split-panel" id="passage-container"></div>
+
+    <!-- RIGHT PANEL: EXERCISES -->
+    <div class="split-panel" id="exercise-container"></div>
+  </div>
+
+  <!-- SCORE SUMMARY MODAL -->
+  <div class="modal-overlay" id="score-modal">
+    <div class="score-modal">
+      <h2 style="color: var(--purple-accent); font-weight: 900;">🎉 KẾT QUẢ BÀI THI 🎉</h2>
+      <p style="color: #666; margin-top: 5px;">Bạn đã hoàn thành xong các bài tập!</p>
+      
+      <div class="score-badge" id="modal-score">0 / 0</div>
+      <p id="modal-feedback" style="font-size: 15px; font-weight: 700; color: #333; margin-bottom: 20px;"></p>
+      
+      <button class="btn-submit-all" onclick="closeModal()">ĐÓNG VÀ XEM ĐÁP ÁN</button>
+    </div>
+  </div>
+
+  <script>
+    // WEB AUDIO SYNTHESIZER
+    function playAudio(type) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (type === 'correct') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1046.50, ctx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.3);
+        } else if (type === 'wrong') {
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(280, now);
+          osc.frequency.setValueAtTime(180, now + 0.15);
+          osc.frequency.setValueAtTime(120, now + 0.3);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        }
+      } catch(e) {}
+    }
+
+    // CONFETTI ANIMATION
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const particles = [];
+      const colors = ['#FF4081', '#FDCB6E', '#00D26A', '#8854C0', '#00B0FF'];
+      for(let i=0; i<80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          rot: Math.random() * 360,
+          rotSpeed: Math.random() * 6 - 3
+        });
+      }
+
+      let startTime = Date.now();
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.rot += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI)/180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+          ctx.restore();
+        });
+
+        if(Date.now() - startTime < 2000) {
+          requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      render();
+    }
+
+    // COMPLETE DATA INTEGRATION (EXERCISES 7 - 11)
+    const testData = [
+      // TAB 0: EXERCISE 7 & EXERCISE 8
+      {
+        id: 1,
+        title: "EXERCISE 7 & 8: BÀI TẬP ĐIỀN TỪ ĐOẠN VĂN 🏫🚂",
+        paragraphs: [
+          {
+            id: "p_ex7",
+            title: "Exercise 7: Minh's School",
+            text: "Minh is a secondary student at Greenfield. It's a new large (1) ____ at the centre of a big city. There (2) ____ more than fifty classrooms with thousands of students and teachers. A lot of students study there, so the playground is always (3) ____.\nMinh’s classroom is (4) ____ the third floor. It's very modern and (5) ____. The students must clean their classrooms everyday. There is a also big library (6) ____ his class. Minh likes studying with his classmates and doing homework there. At break time, he often goes to the canteen to buy some snacks. It’s his favourite place because it has the most delicious food and drinks. However, there is one thing he (7) ____ about it: the food is sometimes too expensive.",
+            translation: "Minh là học sinh cấp hai tại trường Greenfield. Đó là một ngôi trường lớn mới xây ở trung tâm thành phố lớn. Có hơn 50 phòng học với hàng ngàn học sinh và giáo viên. Rất nhiều học sinh học tập ở đó, vì vậy sân trường luôn ồn ào. Phòng học của Minh ở tầng ba. Nó rất hiện đại và sạch sẽ ngăn nắp. Học sinh phải dọn dẹp lớp học hằng ngày. Cũng có một thư viện lớn gần lớp học của cậu ấy. Minh thích học cùng các bạn cùng lớp và làm bài tập về nhà ở đó. Vào giờ ra chơi, cậu ấy thường đến căng tin để mua đồ ăn vặt. Đó là nơi yêu thích của Minh vì nó có đồ ăn và thức uống ngon nhất. Tuy nhiên, có một điều cậu ấy không thích ở đó: đồ ăn đôi khi quá đắt."
+          },
+          {
+            id: "p_ex8",
+            title: "Exercise 8: The Railway System",
+            text: "The railway system (1) ________ in England in the 1820s and became one of the (2) ________successful methods of transportation. The railway was practical and connected (3) ________ of Europe for transport of people and products for over 100 years. They replaced the wagons drawn (4) ________ horses, and as time passed, the companies and inventors responsible for the railways improved the trains and the (5) ________. For the growing United States, the railways presented the only option to connect the already established Eastern coast with the settler and budding towns in the Midwest and West.",
+            translation: "Hệ thống đường sắt bắt đầu ở Anh vào những năm 1820 và trở thành một trong những phương thức vận tải thành công nhất. Đường sắt rất thiết thực và đã kết nối phần lớn châu Âu để vận chuyển con người và sản phẩm trong hơn 100 năm. Chúng thay thế các toa xe do ngựa kéo, và khi thời gian trôi qua, các công ty và nhà sáng chế chịu trách nhiệm về đường sắt đã cải tiến tàu hỏa và đường ray. Đối với một nước Mỹ đang phát triển, đường sắt là lựa chọn duy nhất để kết nối bờ Đông đã được thiết lập với những người định cư và các thị trấn mới nổi ở Trung Tây và Miền Tây."
+          }
+        ],
+        glossary: [
+          { word: "Secondary student", pos: "n phr", meaning: "Học sinh trung học học cơ sở", synonym: "junior high student" },
+          { word: "Railway system", pos: "n phr", meaning: "Hệ thống đường sắt", synonym: "train network" },
+          { word: "Practical", pos: "adj", meaning: "Thiết thực, thực tế", synonym: "useful / functional" },
+          { word: "Transportation", pos: "n", meaning: "Giao thông vận tải", synonym: "transit / transport" }
+        ],
+        questions: [
+          {
+            id: "ex7_q1",
+            type: "mcq",
+            text: "Ex 7 - Blank (1): It's a new large (1) ____ at the centre of a big city.",
+            options: ["A. school", "B. square", "C. station", "D. house"],
+            correct: 0,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "A. school",
+              quote: "Minh is a secondary student at Greenfield. It's a new large school at the centre of a big city.",
+              trans: "Minh là học sinh cấp hai... Đó là một trường học lớn mới xây...",
+              synonyms: "• secondary student -> học ở school (trường học)"
+            }
+          },
+          {
+            id: "ex7_q2",
+            type: "mcq",
+            text: "Ex 7 - Blank (2): There (2) ____ more than fifty classrooms...",
+            options: ["A. is", "B. are", "C. has", "D. have"],
+            correct: 1,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "B. are",
+              quote: "There are more than fifty classrooms with thousands of students...",
+              trans: "Có hơn 50 phòng học...",
+              synonyms: "• 'There are' đi với danh từ số nhiều 'fifty classrooms'."
+            }
+          },
+          {
+            id: "ex7_q3",
+            type: "mcq",
+            text: "Ex 7 - Blank (3): ...so the playground is always (3) ____.",
+            options: ["A. quiet", "B. noise", "C. noisy", "D. crowd"],
+            correct: 2,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "C. noisy",
+              quote: "A lot of students study there, so the playground is always noisy.",
+              trans: "Rất nhiều học sinh học ở đó nên sân trường luôn ồn ào.",
+              synonyms: "• noisy = ồn ào (tính từ đứng sau động từ tobe 'is')."
+            }
+          },
+          {
+            id: "ex7_q4",
+            type: "mcq",
+            text: "Ex 7 - Blank (4): Minh’s classroom is (4) ____ the third floor.",
+            options: ["A. on", "B. in", "C. at", "D. from"],
+            correct: 0,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "A. on",
+              quote: "Minh’s classroom is on the third floor.",
+              trans: "Phòng học của Minh ở tầng ba.",
+              synonyms: "• Giới từ chỉ tầng vị trí trong tòa nhà dùng 'on the ... floor'."
+            }
+          },
+          {
+            id: "ex7_q5",
+            type: "mcq",
+            text: "Ex 7 - Blank (5): It's very modern and (5) ____.",
+            options: ["A. messy", "B. untidy", "C. tidy", "D. tidies"],
+            correct: 2,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "C. tidy",
+              quote: "It's very modern and tidy. The students must clean their classrooms everyday.",
+              trans: "Nó rất hiện đại và ngăn nắp.",
+              synonyms: "• tidy = ngăn nắp, sạch sẽ (tính từ khen ngợi phòng học)."
+            }
+          },
+          {
+            id: "ex7_q6",
+            type: "mcq",
+            text: "Ex 7 - Blank (6): There is a also big library (6) ____ his class.",
+            options: ["A. far", "B. near", "C. close", "D. in"],
+            correct: 1,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "B. near",
+              quote: "There is a also big library near his class.",
+              trans: "Cũng có một thư viện lớn gần lớp học của cậu ấy.",
+              synonyms: "• near + N = gần (far cần 'from', close cần 'to')."
+            }
+          },
+          {
+            id: "ex7_q7",
+            type: "mcq",
+            text: "Ex 7 - Blank (7): ...one thing he (7) ____ about it: the food is sometimes too expensive.",
+            options: ["A. love", "B. like", "C. dislike", "D. dislikes"],
+            correct: 3,
+            paragraphId: "p_ex7",
+            explanation: {
+              ans: "D. dislikes",
+              quote: "...there is one thing he dislikes about it: the food is sometimes too expensive.",
+              trans: "...có một điều cậu ấy không thích: đồ ăn đôi khi quá đắt.",
+              synonyms: "• Chủ ngữ 'he' đi với động từ thêm 's/es' -> dislikes."
+            }
+          },
+          {
+            id: "ex8_q1",
+            type: "mcq",
+            text: "Ex 8 - Blank (1): The railway system (1) ________ in England in the 1820s...",
+            options: ["A. began", "B. begin", "C. beguns", "D. beginning"],
+            correct: 0,
+            paragraphId: "p_ex8",
+            explanation: {
+              ans: "A. began",
+              quote: "The railway system began in England in the 1820s...",
+              trans: "Hệ thống đường sắt bắt đầu ở Anh vào những năm 1820...",
+              synonyms: "• Thời điểm trong quá khứ 'in the 1820s' chia Thì Quá Khứ Đơn -> began."
+            }
+          },
+          {
+            id: "ex8_q2",
+            type: "mcq",
+            text: "Ex 8 - Blank (2): ...became one of the (2) ________ successful methods...",
+            options: ["A. more", "B. most", "C. least", "D. so"],
+            correct: 1,
+            paragraphId: "p_ex8",
+            explanation: {
+              ans: "B. most",
+              quote: "...became one of the most successful methods of transportation.",
+              trans: "...trở thành một trong những phương thức vận tải thành công nhất.",
+              synonyms: "• So sánh nhất: one of the most + Adj dài."
+            }
+          },
+          {
+            id: "ex8_q3",
+            type: "mcq",
+            text: "Ex 8 - Blank (3): ...and connected (3) ________ of Europe...",
+            options: ["A. much", "B. few", "C. little", "D. some"],
+            correct: 0,
+            paragraphId: "p_ex8",
+            explanation: {
+              ans: "A. much",
+              quote: "...and connected much of Europe for transport of people...",
+              trans: "...và kết nối phần lớn châu Âu...",
+              synonyms: "• 'much of + tên vùng/lãnh thổ' = phần lớn khu vực."
+            }
+          },
+          {
+            id: "ex8_q4",
+            type: "mcq",
+            text: "Ex 8 - Blank (4): They replaced the wagons drawn (4) ________ horses...",
+            options: ["A. for", "B. by", "C. of", "D. on"],
+            correct: 1,
+            paragraphId: "p_ex8",
+            explanation: {
+              ans: "B. by",
+              quote: "They replaced the wagons drawn by horses...",
+              trans: "Chúng thay thế các toa xe do ngựa kéo...",
+              synonyms: "• Câu bị động rút gọn: drawn by + agent (được kéo bởi...)."
+            }
+          },
+          {
+            id: "ex8_q5",
+            type: "mcq",
+            text: "Ex 8 - Blank (5): ...improved the trains and the (5) ________.",
+            options: ["A. tracks", "B. roads", "C. paths", "D. ways"],
+            correct: 0,
+            paragraphId: "p_ex8",
+            explanation: {
+              ans: "A. tracks",
+              quote: "...improved the trains and the tracks.",
+              trans: "...cải tiến tàu hỏa và đường ray.",
+              synonyms: "• railway tracks = đường ray tàu hỏa."
+            }
+          }
+        ]
+      },
+
+      // TAB 1: EXERCISE 9
+      {
+        id: 2,
+        title: "EXERCISE 9: BÀI ĐỌC ĐÔ THỊ LONDON (LONDON TRAFFIC) 🏙️",
+        paragraphs: [
+          {
+            id: "p_ex9_1",
+            title: "Passage 1: Traffic in London",
+            text: "London is the capital city of the United Kingdom. There are a lot of cars in the city. People go everywhere by car, so traffic in the city centre is heavier than that in the suburbs. It is harder to find a place to park a car than to do it in other areas. The public means of transport is cheaper than cars but the Londoners prefer their own cars. Moreover, there are more and more tourists and visitors coming to London for sightseeing or shopping. At weekends, the streets are noisier and busier than they are on weekdays. Now, traffic jams are worse than ever before.",
+            translation: "London là thủ đô của Vương quốc Anh. Có rất nhiều xe hơi trong thành phố. Mọi người đi khắp nơi bằng xe hơi, do đó giao thông ở trung tâm thành phố đông đúc hơn so với ở ngoại ô. Việc tìm một nơi đỗ xe hơi khó hơn so với các khu vực khác. Các phương tiện giao thông công cộng rẻ hơn xe hơi nhưng người dân London thích sử dụng xe hơi riêng của họ hơn. Hơn nữa, ngày càng có nhiều khách du lịch và du khách đến London để tham quan hoặc mua sắm. Vào cuối tuần, đường phố ồn ào và nhộn nhịp hơn ngày thường. Hiện nay, ùn tắc giao thông trở nên tồi tệ hơn bao giờ hết."
+          },
+          {
+            id: "p_ex9_2",
+            title: "Passage 2: Living in London",
+            text: "Although the living cost in the suburbs and the countryside is cheaper than that in the city centre, most young people prefer living in the city centre. London is richer than other cities in the United Kingdom, but it is more polluted because of the city Industry, vehicles, and plenty of people.",
+            translation: "Mặc dù chi phí sinh hoạt ở ngoại ô và nông thôn rẻ hơn so với trung tâm thành phố, nhưng hầu hết người trẻ vẫn thích sống ở trung tâm thành phố hơn. London giàu có hơn các thành phố khác ở Vương quốc Anh, nhưng nó bị ô nhiễm hơn do công nghiệp, xe cộ và lượng người đông đúc."
+          }
+        ],
+        glossary: [
+          { word: "Capital city", pos: "n phr", meaning: "Thủ đô", synonym: "main city / metropolis" },
+          { word: "Suburbs", pos: "n", meaning: "Khu vực ngoại ô", synonym: "outskirts" },
+          { word: "Public transport", pos: "n phr", meaning: "Phương tiện công cộng", synonym: "transit system" },
+          { word: "Traffic jam", pos: "n phr", meaning: "Ún tắc giao thông", synonym: "gridlock / congestion" },
+          { word: "Polluted", pos: "adj", meaning: "Bị ô nhiễm", synonym: "contaminated / dirty" }
+        ],
+        questions: [
+          {
+            id: "ex9_q1",
+            type: "mcq",
+            text: "1. How is the traffic in London?",
+            options: [
+              "A. Traffic in the city centre is better than before.",
+              "B. Traffic in the suburbs is better than before.",
+              "C. Traffic in the city centre is heavier than that in the suburbs.",
+              "D. Traffic in the suburbs is heavier than that in the city centre."
+            ],
+            correct: 2,
+            paragraphId: "p_ex9_1",
+            explanation: {
+              ans: "C. Traffic in the city centre is heavier than that in the suburbs.",
+              quote: "...so traffic in the city centre is heavier than that in the suburbs.",
+              trans: "...giao thông ở trung tâm thành phố đông đúc hơn so với ngoại ô.",
+              synonyms: "• traffic in city centre > traffic in suburbs"
+            }
+          },
+          {
+            id: "ex9_q2",
+            type: "mcq",
+            text: "2. People in London prefer to go around _______.",
+            options: [
+              "A. by their own cars",
+              "B. by public means of transport",
+              "C. by both their own cars and public means of transport",
+              "D. by any vehicles"
+            ],
+            correct: 0,
+            paragraphId: "p_ex9_1",
+            explanation: {
+              ans: "A. by their own cars",
+              quote: "...the Londoners prefer their own cars.",
+              trans: "...người dân London thích sử dụng xe hơi riêng của họ hơn.",
+              synonyms: "• prefer their own cars = go around by their own cars"
+            }
+          },
+          {
+            id: "ex9_q3",
+            type: "mcq",
+            text: "3. How are the streets in London at weekends?",
+            options: [
+              "A. There is less traffic.",
+              "B. The streets are noisier.",
+              "C. Traffic jams are better.",
+              "D. The traffic is not heavier."
+            ],
+            correct: 1,
+            paragraphId: "p_ex9_1",
+            explanation: {
+              ans: "B. The streets are noisier.",
+              quote: "At weekends, the streets are noisier and busier than they are on weekdays.",
+              trans: "Vào cuối tuần, đường phố ồn ào và nhộn nhịp hơn ngày thường.",
+              synonyms: "• noisier and busier = noisier"
+            }
+          },
+          {
+            id: "ex9_q4",
+            type: "mcq",
+            text: "4. The living cost in the city centre is _______.",
+            options: [
+              "A. cheaper than that in the suburbs and the countryside",
+              "B. not expensive but people like to live in the suburbs and the countryside",
+              "C. not cheap so more people want to leave for the suburbs and the countryside",
+              "D. more expensive than that in the suburbs and the countryside"
+            ],
+            correct: 3,
+            paragraphId: "p_ex9_2",
+            explanation: {
+              ans: "D. more expensive than that in the suburbs and the countryside",
+              quote: "Although the living cost in the suburbs and the countryside is cheaper than that in the city centre...",
+              trans: "Mặc dù chi phí ở ngoại ô rẻ hơn trung tâm -> Chi phí trung tâm đắt hơn ngoại ô.",
+              synonyms: "• A is cheaper than B = B is more expensive than A"
+            }
+          },
+          {
+            id: "ex9_q5",
+            type: "mcq",
+            text: "5. According to the passage, what is NOT true about London?",
+            options: [
+              "A. London’s public means of transport is more expensive than cars.",
+              "B. There are a lot of people in the city centre, especially at weekends.",
+              "C. More and more people come to London for sightseeing.",
+              "D. London is richer than other cities in the United Kingdom."
+            ],
+            correct: 0,
+            paragraphId: "p_ex9_1",
+            explanation: {
+              ans: "A. London’s public means of transport is more expensive than cars.",
+              quote: "The public means of transport is cheaper than cars...",
+              trans: "Phương tiện công cộng rẻ hơn xe hơi (Trong câu A nói đắt hơn là SAI).",
+              synonyms: "• cheaper than cars <-> more expensive than cars"
+            }
+          }
+        ]
+      },
+
+      // TAB 2: EXERCISE 10
+      {
+        id: 3,
+        title: "EXERCISE 10: LỄ HỘI TẾT NGUYÊN ĐÁN Ở HÀN QUỐC 🧧",
+        paragraphs: [
+          {
+            id: "p_ex10_1",
+            title: "Passage: Lunar New Year in South Korea",
+            text: "In South Korea, Lunar New Year is a very important holiday. Korean people often go back to their hometowns to celebrate with family. They start preparing a few days before the New Year’s Eve. People clean their houses and cook delicious food. On these days, Koreans wear traditional clothes called \"hanbok.\" They do a bowing ceremony to honor their ancestors. This is how they show respect to grandparents and ancestors. Korean people also eat \"tteokguk\" - a rice cake soup. They believe that eating tteokguk makes them one year older and brings good luck. Like Vietnamese and Chinese, children in Korea also receive lucky money from the adults. During this time, people should not say unlucky words or break things, because Koreans think it brings bad luck. Lunar New Year in South Korea is a time for family, remembering ancestors, and welcoming a new year with hope and joy.",
+            translation: "Ở Hàn Quốc, Tết Nguyên Đán là một ngày lễ rất quan trọng. Người Hàn Quốc thường trở về quê hương để ăn mừng cùng gia đình. Họ bắt đầu chuẩn bị một vài ngày trước đêm Giao thừa. Mọi người dọn dẹp nhà cửa và nấu những món ăn ngon. Vào những ngày này, người Hàn Quốc mặc trang phục truyền thống gọi là \"hanbok\". Họ thực hiện nghi lễ bái lạy để tưởng nhớ tổ tiên. Đây là cách họ thể hiện sự kính trọng đối với ông bà và tổ tiên. Người Hàn Quốc cũng ăn \"tteokguk\" - một món canh bánh gạo. Họ tin rằng ăn tteokguk sẽ giúp họ lớn thêm một tuổi và mang lại may mắn. Giống như người Việt Nam và Trung Quốc, trẻ em ở Hàn Quốc cũng nhận được tiền may mắn (tiền lì xì) từ người lớn. Trong thời gian này, mọi người không nên nói những từ không may mắn hoặc làm vỡ đồ đạc, vì người Hàn Quốc cho rằng điều đó mang lại xui xẻo. Tết Nguyên Đán ở Hàn Quốc là thời gian dành cho gia đình, tưởng nhớ tổ tiên và chào đón một năm mới với hy vọng và niềm vui."
+          }
+        ],
+        glossary: [
+          { word: "Hometown", pos: "n", meaning: "Quê hương", synonym: "native land / birthplace" },
+          { word: "Hanbok", pos: "n", meaning: "Trang phục truyền thống Hàn Quốc", synonym: "traditional Korean attire" },
+          { word: "Bowing ceremony", pos: "n phr", meaning: "Nghi lễ bái lạy", synonym: "obeisance / formal bow" },
+          { word: "Ancestors", pos: "n", meaning: "Tổ tiên, ông bà", synonym: "forefathers" },
+          { word: "Lucky money", pos: "n phr", meaning: "Tiền may mắn / Tiền lì xì", synonym: "red envelope money" }
+        ],
+        questions: [
+          {
+            id: "ex10_q1",
+            type: "mcq",
+            text: "1. What do Korean people do in Lunar New Year?",
+            options: [
+              "A. They stay at their work.",
+              "B. They celebrate with friends at their home.",
+              "C. They leave their hometowns.",
+              "D. They go back to their hometowns."
+            ],
+            correct: 3,
+            paragraphId: "p_ex10_1",
+            explanation: {
+              ans: "D. They go back to their hometowns.",
+              quote: "Korean people often go back to their hometowns to celebrate with family.",
+              trans: "Người Hàn Quốc thường trở về quê hương để ăn mừng cùng gia đình.",
+              synonyms: "• go back to their hometowns"
+            }
+          },
+          {
+            id: "ex10_q2",
+            type: "mcq",
+            text: "2. Why do Koreans do bowing ceremony?",
+            options: [
+              "A. To show respect to the ancestors.",
+              "B. To make them one year older.",
+              "C. To bring good luck.",
+              "D. To honor themselves."
+            ],
+            correct: 0,
+            paragraphId: "p_ex10_1",
+            explanation: {
+              ans: "A. To show respect to the ancestors.",
+              quote: "They do a bowing ceremony to honor their ancestors. This is how they show respect to grandparents and ancestors.",
+              trans: "Họ thực hiện nghi lễ bái lạy để tưởng nhớ tổ tiên và thể hiện sự kính trọng.",
+              synonyms: "• honor/show respect to ancestors"
+            }
+          },
+          {
+            id: "ex10_q3",
+            type: "mcq",
+            text: "3. Receiving lucky money is the same in ______.",
+            options: [
+              "A. Vietnam, Japan, Korea",
+              "B. Vietnam, Japan, China",
+              "C. China, Vietnam, Korea",
+              "D. China, Korea, Japan"
+            ],
+            correct: 2,
+            paragraphId: "p_ex10_1",
+            explanation: {
+              ans: "C. China, Vietnam, Korea",
+              quote: "Like Vietnamese and Chinese, children in Korea also receive lucky money from the adults.",
+              trans: "Giống như người Việt Nam và Trung Quốc, trẻ em Hàn Quốc cũng nhận tiền lì xì.",
+              synonyms: "• Vietnam, China, Korea"
+            }
+          },
+          {
+            id: "ex10_q4",
+            type: "mcq",
+            text: "4. During Lunar New Year, people should not _______.",
+            options: [
+              "A. say unlucky words",
+              "B. break things",
+              "C. eat rice cake soup",
+              "D. A&B"
+            ],
+            correct: 3,
+            paragraphId: "p_ex10_1",
+            explanation: {
+              ans: "D. A&B",
+              quote: "During this time, people should not say unlucky words or break things...",
+              trans: "Mọi người không nên nói từ xui xẻo hoặc làm vỡ đồ đạc.",
+              synonyms: "• both say unlucky words and break things (A & B)"
+            }
+          },
+          {
+            id: "ex10_q5",
+            type: "mcq",
+            text: "5. Which of the following statements is NOT true about Lunar New Year in South Korea?",
+            options: [
+              "A. People often prepare a few days before the New Year’s Eve.",
+              "B. People give and receive money from each other.",
+              "C. It’s a time for welcoming new year with hope.",
+              "D. It’s a time for family and remembering ancestors."
+            ],
+            correct: 1,
+            paragraphId: "p_ex10_1",
+            explanation: {
+              ans: "B. People give and receive money from each other.",
+              quote: "...children in Korea also receive lucky money from the adults.",
+              trans: "Chỉ có trẻ em nhận tiền từ người lớn, chứ không phải tất cả mọi người trao nhận lẫn nhau.",
+              synonyms: "• children receive from adults <-> people receive from each other"
+            }
+          }
+        ]
+      },
+
+      // TAB 3: EXERCISE 11
+      {
+        id: 4,
+        title: "EXERCISE 11: BÀI TẬP HOÀN THÀNH HỘI THOẠI 🗣️",
+        paragraphs: [
+          {
+            id: "p_ex11_d1",
+            title: "Dialogue 1: Jane & Lily",
+            text: "Jane: Hi, Lily. How are you?\nLily: Thank you, Jane. I’m good. (1) _________.\nJane: Very well, thanks. Let’s go shopping together this Saturday.\nLily: (2) _________ I’m going to do the housework because my mother has to visit her friend. (3) _________.\nJane: That’s OK, Lily. (4) _________.\nLily: Good idea. (5) _________.\nJane: How about 9 o’clock?\nLily: Ok, Jane. (6) _________.\n\nOption List 1:\nA. Why don’t we go shopping on Sunday?\nB. See you then.\nC. How about you?\nD. What time can we meet?\nE. She’s in hospital.\nF. I’m sorry, I can’t.",
+            translation: "Jane: Chào Lily. Cậu khỏe không?\nLily: Cảm ơn Jane. Tớ khỏe. (1) Còn cậu thì sao?\nJane: Tớ rất khỏe, cảm ơn. Thứ Bảy này chúng mình cùng đi mua sắm nhé.\nLily: (2) Tớ xin lỗi, tớ không thể. Tớ phải làm việc nhà vì mẹ tớ phải đi thăm bạn của bà. (3) Cô ấy đang ở bệnh viện.\nJane: Không sao đâu Lily. (4) Tại sao chúng mình không đi mua sắm vào Chủ Nhật nhỉ?\nLily: Ý hay đấy. (5) Mấy giờ chúng mình có thể gặp nhau?\nJane: 9 giờ thì sao?\nLily: Được rồi Jane. (6) Hẹn gặp lại cậu khi đó."
+          },
+          {
+            id: "p_ex11_d2",
+            title: "Dialogue 2: Phong, Quan & Minh",
+            text: "Phong: Hi, Quan. How are you today?\nQuan: Hi, Phong. I’m very well, thanks. And you?\nPhong: (7) _________ Who is that?\nQuan: Ah, this is Minh. (8) _________\nPhong: Hi, Minh. Nice to meet you.\nMinh: (9) _________\nPhong: Do you also live in Ho Chi Minh City?\nMinh: No, I don’t. (10) _________\nPhong: Do you like sports?\nMinh: Yes, I do.\nPhong: (11) _________\nMinh: It’s table tennis.\nPhong: Oh, Quan and I like it, too. (12) _________\nQuan: It sounds interesting.\n\nOption List 2:\nA. What is your favourite sport?\nB. Let’s play table tennis this afternoon.\nC. He is my cousin.\nD. I live in Nha Trang.\nE. I’m fine.\nF. Nice to meet you, too.",
+            translation: "Phong: Chào Quân. Hôm nay cậu khỏe không?\nQuân: Chào Phong. Tớ rất khỏe, cảm ơn. Còn cậu?\nPhong: (7) Tớ khỏe. Ai kia thế?\nQuân: À, đây là Minh. (8) Cậu ấy là anh em họ của tớ.\nPhong: Chào Minh. Rất vui được gặp cậu.\nMinh: (9) Tớ cũng rất vui được gặp cậu.\nPhong: Cậu cũng sống ở Thành phố Hồ Chí Minh à?\nMinh: Không, tớ không. (10) Tớ sống ở Nha Trang.\nPhong: Cậu có thích thể thao không?\nMinh: Có, tớ có.\nPhong: (11) Môn thể thao yêu thích của cậu là gì?\nMinh: Đó là bóng bàn.\nPhong: Ồ, Quân và tớ cũng thích môn đó. (12) Chiều nay chúng mình cùng chơi bóng bàn nhé.\nQuân: Nghe thú vị đấy."
+          }
+        ],
+        glossary: [
+          { word: "Housework", pos: "n", meaning: "Công việc nhà", synonym: "chores / household tasks" },
+          { word: "Cousin", pos: "n", meaning: "Anh/chị/em họ", synonym: "relative" },
+          { word: "Table tennis", pos: "n phr", meaning: "Môn bóng bàn", synonym: "ping-pong" }
+        ],
+        questions: [
+          {
+            id: "ex11_q1",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (1)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 2,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "C. How about you?",
+              quote: "Lily: Thank you, Jane. I’m good. How about you?",
+              trans: "Cảm ơn Jane. Tớ khỏe. Còn cậu thì sao?",
+              synonyms: "• Đáp lại câu hỏi sức khỏe 'How are you?' bằng 'How about you?'."
+            }
+          },
+          {
+            id: "ex11_q2",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (2)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 5,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "F. I’m sorry, I can’t.",
+              quote: "Lily: I’m sorry, I can’t. I’m going to do the housework...",
+              trans: "Tớ xin lỗi, tớ không thể. Tớ phải làm việc nhà...",
+              synonyms: "• Từ chối lời mời 'Let's go shopping'."
+            }
+          },
+          {
+            id: "ex11_q3",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (3)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 4,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "E. She’s in hospital.",
+              quote: "...because my mother has to visit her friend. She’s in hospital.",
+              trans: "...vì mẹ tớ phải đi thăm bạn. Cô ấy đang ở bệnh viện.",
+              synonyms: "• Giải thích lý do bạn của mẹ ở đâu (in hospital)."
+            }
+          },
+          {
+            id: "ex11_q4",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (4)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 0,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "A. Why don’t we go shopping on Sunday?",
+              quote: "Jane: That’s OK, Lily. Why don’t we go shopping on Sunday?",
+              trans: "Không sao đâu Lily. Tại sao chúng mình không đi mua sắm vào Chủ Nhật nhỉ?",
+              synonyms: "• Đề xuất một ngày khác sau khi Thứ Bảy bị từ chối."
+            }
+          },
+          {
+            id: "ex11_q5",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (5)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 3,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "D. What time can we meet?",
+              quote: "Lily: Good idea. What time can we meet?",
+              trans: "Ý hay đấy. Mấy giờ chúng mình có thể gặp nhau?",
+              synonyms: "• Dẫn sang câu trả lời về giờ giấc 'How about 9 o'clock?'."
+            }
+          },
+          {
+            id: "ex11_q6",
+            type: "mcq",
+            text: "Dialogue 1 - Blank (6)",
+            options: ["A. Why don’t we go shopping on Sunday?", "B. See you then.", "C. How about you?", "D. What time can we meet?", "E. She’s in hospital.", "F. I’m sorry, I can’t."],
+            correct: 1,
+            paragraphId: "p_ex11_d1",
+            explanation: {
+              ans: "B. See you then.",
+              quote: "Lily: Ok, Jane. See you then.",
+              trans: "Được rồi Jane. Hẹn gặp lại cậu lúc đó.",
+              synonyms: "• Câu chào kết thúc cuộc hẹn."
+            }
+          },
+          {
+            id: "ex11_q7",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (7)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 4,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "E. I’m fine.",
+              quote: "Phong: I’m fine. Who is that?",
+              trans: "Phong: Tớ khỏe. Ai kia thế?",
+              synonyms: "• Trả lời câu hỏi sức khỏe 'And you?'."
+            }
+          },
+          {
+            id: "ex11_q8",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (8)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 2,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "C. He is my cousin.",
+              quote: "Quan: Ah, this is Minh. He is my cousin.",
+              trans: "Quân: À đây là Minh. Cậu ấy là anh em họ của tớ.",
+              synonyms: "• Giới thiệu mối quan hệ nhân vật."
+            }
+          },
+          {
+            id: "ex11_q9",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (9)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 5,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "F. Nice to meet you, too.",
+              quote: "Minh: Nice to meet you, too.",
+              trans: "Minh: Tớ cũng rất vui được gặp cậu.",
+              synonyms: "• Đáp lại câu 'Nice to meet you'."
+            }
+          },
+          {
+            id: "ex11_q10",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (10)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 3,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "D. I live in Nha Trang.",
+              quote: "Minh: No, I don’t. I live in Nha Trang.",
+              trans: "Minh: Không tớ không. Tớ sống ở Nha Trang.",
+              synonyms: "• Trả lời câu hỏi vị trí nơi sống."
+            }
+          },
+          {
+            id: "ex11_q11",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (11)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 0,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "A. What is your favourite sport?",
+              quote: "Phong: What is your favourite sport? Minh: It’s table tennis.",
+              trans: "Phong: Môn thể thao yêu thích của cậu là gì? Minh: Là bóng bàn.",
+              synonyms: "• Hỏi về môn thể thao yêu thích."
+            }
+          },
+          {
+            id: "ex11_q12",
+            type: "mcq",
+            text: "Dialogue 2 - Blank (12)",
+            options: ["A. What is your favourite sport?", "B. Let’s play table tennis this afternoon.", "C. He is my cousin.", "D. I live in Nha Trang.", "E. I’m fine.", "F. Nice to meet you, too."],
+            correct: 1,
+            paragraphId: "p_ex11_d2",
+            explanation: {
+              ans: "B. Let’s play table tennis this afternoon.",
+              quote: "Phong: Oh, Quan and I like it, too. Let’s play table tennis this afternoon.",
+              trans: "Phong: Ồ Quân và tớ cũng thích. Chiều nay chúng mình cùng chơi bóng bàn nhé.",
+              synonyms: "• Đưa ra lời rủ rê chơi bóng bàn."
+            }
+          }
+        ]
+      }
+    ];
+
+    let currentTab = 0;
+    let timerInterval = null;
+    let timerSeconds = 1200; // 20:00
+    let timerRunning = false;
+    let userAnswers = {};
+
+    window.onload = function() {
+      renderCurrentTab();
+      setupHighlightEngine();
+    };
+
+    function renderCurrentTab() {
+      const data = testData[currentTab];
+
+      // LEFT PANEL (Passages)
+      let pHTML = `<h2 class="section-header-title">${data.title}</h2>`;
+      data.paragraphs.forEach(p => {
+        pHTML += `
+          <div class="paragraph-card" id="para-${p.id}">
+            <h3 style="color: var(--purple-accent); font-size: 15px; margin-bottom: 6px;">${p.title}</h3>
+            <div class="passage-text" style="white-space: pre-line;">${p.text}</div>
+            <button class="btn-toggle-trans" onclick="toggleTranslation('${p.id}')">
+              <span>🌟</span> BẢN DỊCH ĐẦY ĐỦ
+            </button>
+            <div class="translation-box" id="trans-${p.id}" style="white-space: pre-line;">${p.translation}</div>
+          </div>
+        `;
+      });
+
+      // Glossary Table
+      pHTML += `
+        <div class="glossary-section">
+          <div class="glossary-title">📚 BẢNG TỪ VỰNG ACADEMIC (B2-C2)</div>
+          <table class="glossary-table">
+            <thead>
+              <tr>
+                <th>Từ vựng</th>
+                <th>Loại từ</th>
+                <th>Nghĩa tiếng Việt</th>
+                <th>Từ đồng nghĩa / Ngữ cảnh</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+      data.glossary.forEach(g => {
+        pHTML += `
+          <tr>
+            <td><strong>${g.word}</strong></td>
+            <td><em>${g.pos}</em></td>
+            <td>${g.meaning}</td>
+            <td><code>${g.synonym}</code></td>
+          </tr>
+        `;
+      });
+      pHTML += `</tbody></table></div>`;
+      document.getElementById('passage-container').innerHTML = pHTML;
+
+      // RIGHT PANEL (Exercises)
+      let qHTML = '';
+      data.questions.forEach((q, idx) => {
+        qHTML += `<div class="question-card" id="card-${q.id}">`;
+        qHTML += `<div class="q-number">Câu ${idx + 1}</div>`;
+        qHTML += `<div class="q-text">${q.text}</div>`;
+
+        if (q.type === 'mcq') {
+          qHTML += `<div class="options-grid">`;
+          q.options.forEach((opt, oIdx) => {
+            qHTML += `
+              <button class="option-btn" id="opt-${q.id}-${oIdx}" onclick="checkMCQ('${q.id}', ${oIdx}, ${q.correct})">
+                <span>${opt}</span>
+              </button>
+            `;
+          });
+          qHTML += `</div>`;
+        }
+
+        // Detailed Explanation Card
+        qHTML += `
+          <div class="explanation-card" id="exp-${q.id}">
+            <div class="exp-title">
+              <span>💡 PHẦN GIẢI THÍCH CHI TIẾT</span>
+              <button class="btn-locate" onclick="locateEvidence('${q.paragraphId}')">
+                🖱️ 📍 Vị trí dẫn chứng
+              </button>
+            </div>
+            <div class="exp-item"><strong>1. ĐÁP ÁN:</strong> ${q.explanation.ans}</div>
+            <div class="exp-item"><strong>2. ĐOẠN CHỨA ĐÁP ÁN:</strong> "${q.explanation.quote}"</div>
+            <div class="exp-item"><strong>3. DỊCH NGHĨA:</strong> ${q.explanation.trans}</div>
+            <div class="exp-item"><strong>4. TỪ ĐỒNG NGHĨA / PHÂN TÍCH:</strong><br><span style="white-space: pre-line;">${q.explanation.synonyms}</span></div>
+          </div>
+        `;
+
+        qHTML += `</div>`;
+      });
+
+      qHTML += `
+        <div class="submit-bar">
+          <button class="btn-submit-all" onclick="submitTest()">NỘP BÀI VÀ XEM ĐIỂM 🚀</button>
+        </div>
+      `;
+
+      document.getElementById('exercise-container').innerHTML = qHTML;
+    }
+
+    function switchTab(idx) {
+      currentTab = idx;
+      document.querySelectorAll('.tab-btn').forEach((btn, tIdx) => {
+        btn.classList.toggle('active', tIdx === idx);
+      });
+      renderCurrentTab();
+    }
+
+    function toggleTranslation(pId) {
+      const transBox = document.getElementById(`trans-${pId}`);
+      transBox.style.display = (transBox.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function checkMCQ(qId, selectedIdx, correctIdx) {
+      const card = document.getElementById(`card-${qId}`);
+      const buttons = card.querySelectorAll('.option-btn');
+      
+      buttons.forEach((btn, idx) => {
+        btn.classList.remove('correct', 'wrong');
+        if (idx === correctIdx) {
+          btn.classList.add('correct');
+        }
+      });
+
+      if (selectedIdx === correctIdx) {
+        playAudio('correct');
+        triggerConfetti();
+        userAnswers[qId] = true;
+      } else {
+        buttons[selectedIdx].classList.add('wrong');
+        playAudio('wrong');
+        userAnswers[qId] = false;
+      }
+
+      document.getElementById(`exp-${qId}`).style.display = 'block';
+      updateProgressBar();
+    }
+
+    function locateEvidence(paragraphId) {
+      const paraElem = document.getElementById(`para-${paragraphId}`);
+      if (paraElem) {
+        paraElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        paraElem.classList.add('highlight-target');
+        setTimeout(() => {
+          paraElem.classList.remove('highlight-target');
+        }, 2500);
+      }
+    }
+
+    function setupHighlightEngine() {
+      document.addEventListener('mouseup', function() {
+        const selection = window.getSelection();
+        if (!selection.rangeCount || selection.isCollapsed) return;
+        const range = selection.getRangeAt(0);
+        const container = range.commonAncestorContainer;
+        let elem = container.nodeType === 3 ? container.parentNode : container;
+        
+        if (elem.closest('.passage-text')) {
+          const mark = document.createElement('mark');
+          mark.className = 'pastel-highlight';
+          try {
+            range.surroundContents(mark);
+            selection.removeAllRanges();
+          } catch(e) {}
+        }
+      });
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('btn-timer-toggle');
+      if (!timerRunning) {
+        timerRunning = true;
+        btn.innerText = "TẠM DỪNG TÍNH GIỜ";
+        timerInterval = setInterval(() => {
+          timerSeconds--;
+          updateTimerDisplay();
+          if (timerSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            alert("⏰ Đã hết giờ làm bài. Bạn vẫn có thể tiếp tục làm, nhưng nhớ là trong phòng thi thật, bạn chỉ nên làm một bài như thế này trong 20-25 phút thôi nha.");
+          }
+        }, 1000);
+      } else {
+        timerRunning = false;
+        clearInterval(timerInterval);
+        btn.innerText = "TIẾP TỤC TÍNH GIỜ";
+      }
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById('timer-display').innerText = 
+        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgressBar() {
+      let totalQuestions = 0;
+      testData.forEach(p => totalQuestions += p.questions.length);
+      const answeredCount = Object.keys(userAnswers).length;
+      const percent = Math.round((answeredCount / totalQuestions) * 100);
+      
+      document.getElementById('progress-fill').style.width = `${percent}%`;
+      document.getElementById('progress-text').innerText = `Tiến độ: ${percent}%`;
+    }
+
+    function submitTest() {
+      let total = 0;
+      let correct = 0;
+      
+      testData.forEach(p => {
+        p.questions.forEach(q => {
+          total++;
+          if (userAnswers[q.id] === true) correct++;
+        });
+      });
+
+      document.getElementById('modal-score').innerText = `${correct} / ${total}`;
+      
+      let feedback = "";
+      const ratio = correct / total;
+      if (ratio === 1) feedback = "🌟 ĐỈNH CAO THIÊN TÀI! Bạn đã trả lời chính xác 100% tất cả các câu!";
+      else if (ratio >= 0.7) feedback = "🎉 LÀM TỐT LẮM! Kiến thức Tiếng Anh của bạn thật xuất sắc!";
+      else feedback = "💪 CỐ LÊN NHÉ! Đừng quên nhấn nút định vị dẫn chứng để xem lại câu chưa làm đúng nha!";
+
+      document.getElementById('modal-feedback').innerText = feedback;
+      document.getElementById('score-modal').style.display = 'flex';
+      triggerConfetti();
+    }
+
+    function closeModal() {
+      document.getElementById('score-modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
